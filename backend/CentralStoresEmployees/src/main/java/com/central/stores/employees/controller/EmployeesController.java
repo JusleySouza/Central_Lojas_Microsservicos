@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import com.central.stores.employees.model.Employee;
 import com.central.stores.employees.model.dto.RequestEmployeeDTO;
-import com.central.stores.employees.model.dto.ResponseEmployeeDTO;
 import com.central.stores.employees.services.EmployeesServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
