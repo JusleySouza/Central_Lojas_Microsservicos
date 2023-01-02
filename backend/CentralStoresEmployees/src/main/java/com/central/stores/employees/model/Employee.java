@@ -1,5 +1,6 @@
 package com.central.stores.employees.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -12,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.central.stores.employees.constants.Conf;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +31,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employee {
+public class Employee implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(updatable = false, nullable = false)
@@ -52,9 +56,9 @@ public class Employee {
 	@Column(nullable = false)
 	private String email;
 	@Column(nullable = false)
-	@DateTimeFormat(pattern = Conf.dateFormat)
+	@DateTimeFormat(pattern = Conf.DATE_FORMAT)
 	private LocalDate created;
-	@DateTimeFormat(pattern = Conf.dateFormat)
+	@DateTimeFormat(pattern = Conf.DATE_FORMAT)
 	private LocalDate changed;
 
 	@OneToOne(cascade = CascadeType.ALL)

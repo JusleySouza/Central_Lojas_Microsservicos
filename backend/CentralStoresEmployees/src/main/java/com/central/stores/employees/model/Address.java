@@ -1,5 +1,6 @@
 package com.central.stores.employees.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -27,7 +28,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
+public class Address implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(updatable = false, nullable = false)
@@ -40,8 +44,8 @@ public class Address {
 	private String neighborhood;
 	@Column(nullable = false)
 	private String city;
-	@DateTimeFormat(pattern = Conf.dateFormat)
+	@DateTimeFormat(pattern = Conf.DATE_FORMAT)
 	private LocalDate created;
-	@DateTimeFormat(pattern = Conf.dateFormat)
+	@DateTimeFormat(pattern = Conf.DATE_FORMAT)
 	private LocalDate changed;
 }
