@@ -49,7 +49,7 @@ public class AddressControllerTest {
 	void create() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post(CONTEXT_PATH + EMPLOYEE_ID + PATH)
 				.contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(address)))
-				.andExpect(status().isOk());
+				.andExpect(status().isCreated());
 	}
 	
 	@Test

@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.ResponseEntity;
 
 import com.central.stores.employees.mapper.AddressMapper;
 import com.central.stores.employees.model.Address;
@@ -53,7 +52,7 @@ public class AddressServicesImplentTest {
 	void createTest() {
 		when(mapper.toModel(any())).thenReturn(address);
 		when(employeesRepository.findById(any())).thenReturn(Optional.of(employee));
-		ResponseEntity<Address> address = services.create(requestAddressDTO, UUID.randomUUID());
+		Address address = (Address) services.create(requestAddressDTO, UUID.randomUUID()).getBody();
 		
 		assertNotNull(address);
 	}
@@ -61,7 +60,7 @@ public class AddressServicesImplentTest {
 	@Test
 	void updateTest() {
 		when(addressRepository.findById(any())).thenReturn(Optional.of(address));
-		ResponseEntity<Address> address = services.update(requestAddressDTO, UUID.randomUUID());
+		Address address = (Address) services.update(requestAddressDTO, UUID.randomUUID()).getBody();
 		
 		assertNotNull(address);
 	}

@@ -11,14 +11,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
 import com.central.stores.employees.crypto.Cryptography;
 import com.central.stores.employees.mapper.EmployeeMapper;
 import com.central.stores.employees.model.Employee;
@@ -26,6 +18,12 @@ import com.central.stores.employees.model.dto.RequestEmployeeDTO;
 import com.central.stores.employees.model.dto.ResponseEmployeeDTO;
 import com.central.stores.employees.repository.EmployeesRepository;
 import com.central.stores.employees.test.utils.ClassBuilder;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class EmployeesServicesImplementTest {
 
@@ -56,7 +54,7 @@ public class EmployeesServicesImplementTest {
 	public void findByCpfTest() {
 		employee = Cryptography.encode(employee);
 		when(repository.findByCpf(anyString())).thenReturn(employee);
-		Employee emp = services.findByCpf("123456789").getBody();
+		Employee emp = services.findByCpf("123456789");
 
 		assertEquals(emp, employee);
 	}
@@ -66,7 +64,7 @@ public class EmployeesServicesImplementTest {
 		employee = Cryptography.encode(employee);
 		when(repository.findAllByActiveTrueAndAddressNeighborhood(anyString()))
 		.thenReturn(List.of(employee));
-		ResponseEntity<List<Employee>> empList = services.findByNeighborhood("teste");
+		List<Employee> empList = services.findByNeighborhood("teste");
 		
 		assertNotNull(empList);
 	}
@@ -75,25 +73,26 @@ public class EmployeesServicesImplementTest {
 	public void findAllTeste() {
 		employee = Cryptography.encode(employee);
 		when(repository.findAllByActiveTrue()).thenReturn(List.of(employee));
-		ResponseEntity<List<Employee>> empList = services.findAll();
+		List<Employee> empList = services.findAll();
 		assertNotNull(empList);
 	}
 	
 	@Test
 	public void deleteTest() {
 		employee = Cryptography.encode(employee);
+		employee.setActive(false);
 		when(mapper.employeeDelete(any())).thenReturn(employee);
 		when(repository.findById(any())).thenReturn(Optional.of(employee));
-		ResponseEntity<ResponseEmployeeDTO> emp = services.delete(UUID.randomUUID());
+		Employee emp = services.delete(UUID.randomUUID());
 		
-		assertTrue(emp.getStatusCodeValue() == HttpStatus.NO_CONTENT.value());
+		assertTrue(emp.getActive().equals(false));
 	}
 	
 	@Test
 	public void createTest() {
 		when(mapper.toModel(any())).thenReturn(employee);
 		when(mapper.modelToResponseEmployeeDTO(any())).thenReturn(responseEmployeeDTO);
-		ResponseEntity<ResponseEmployeeDTO> emp = services.create(requestEmployeeDTO);
+		RequestEmployeeDTO  emp = (RequestEmployeeDTO) services.create(requestEmployeeDTO).getBody();
 		
 		assertNotNull(emp);
 	}
@@ -102,7 +101,7 @@ public class EmployeesServicesImplementTest {
 	public void updateTest() {
 		when(repository.findById(any())).thenReturn(Optional.of(employee));
 		when(mapper.modelToResponseEmployeeDTO(any())).thenReturn(responseEmployeeDTO);
-		ResponseEntity<ResponseEmployeeDTO> emp = services.update(requestEmployeeDTO, UUID.randomUUID());
+		ResponseEmployeeDTO emp = (ResponseEmployeeDTO) services.update(requestEmployeeDTO, UUID.randomUUID()).getBody();
 		
 		assertNotNull(emp);
 	}

@@ -71,7 +71,7 @@ public class EmployeesControllerTest {
 	void create() throws Exception {
 	mockMvc.perform(MockMvcRequestBuilders.post(CONTEXT_PATH)
 			.contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employee)))
-			.andExpect(status().isOk());
+			.andExpect(status().isCreated());
 	}
 	
 	@Test
@@ -84,6 +84,6 @@ public class EmployeesControllerTest {
 	@Test
 	void delete()throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.delete(CONTEXT_PATH + EMPLOYEE_ID))
-				.andExpect(status().isOk());
+				.andExpect(status().isNoContent());
 	}
 }
