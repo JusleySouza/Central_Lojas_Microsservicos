@@ -4,5 +4,5 @@ import lombok.Generated;
 
 @Generated
 public final class Conf {
-	public static final String dateFormat = "yyyy-MM-dd HH:mm";
+	public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
 }
