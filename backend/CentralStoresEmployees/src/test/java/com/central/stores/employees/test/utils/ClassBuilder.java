@@ -13,6 +13,7 @@ public final class ClassBuilder {
 
 	public static Address addressBuilder() {
 		return Address.builder()
+				.id(UUID.randomUUID())
 				.number(333)
 				.city("Teste city")
 				.street("Teste rua")
@@ -33,6 +34,7 @@ public final class ClassBuilder {
 	
 	public static Employee employeeBuilder() {
 		return Employee.builder()
+				.id(UUID.randomUUID())
 				.gender("M")
 				.active(true)
 				.name("Teste")
