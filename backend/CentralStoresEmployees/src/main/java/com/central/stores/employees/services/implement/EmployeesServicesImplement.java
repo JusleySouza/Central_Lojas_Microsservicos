@@ -9,6 +9,7 @@ import javax.validation.Validator;
 
 import com.central.stores.employees.config.LoggerConfig;
 import com.central.stores.employees.crypto.Cryptography;
+import com.central.stores.employees.exception.DuplicateDocumentsException;
 import com.central.stores.employees.exception.ResourceNotFoundException;
 import com.central.stores.employees.mapper.EmployeeMapper;
 import com.central.stores.employees.mapper.UpdateModel;
@@ -58,6 +59,7 @@ public class EmployeesServicesImplement implements EmployeesServices {
 		employee = repository.findByCpf(Cryptography.encodeCpf(employeeCpf));
 		
 		if(employee == null) {
+			LoggerConfig.LOGGER_EMPLOYEE.error("No record found for this cpf");
 			throw new ResourceNotFoundException("No record found for this cpf");
 		}
 
@@ -74,6 +76,7 @@ public class EmployeesServicesImplement implements EmployeesServices {
 		List<Employee> listEmployees = repository.findAllByActiveTrueAndAddressNeighborhood(neighborhood);
 
 		if(listEmployees.isEmpty()) {
+			LoggerConfig.LOGGER_EMPLOYEE.error("No record found for this neighborhood");
 			throw new ResourceNotFoundException("No record found for this neighborhood");
 		}
 		
@@ -89,11 +92,19 @@ public class EmployeesServicesImplement implements EmployeesServices {
 		Set<ConstraintViolation<RequestEmployeeDTO>> violations = validator.validate(requestEmployeeDTO);
 		
 		if(!violations.isEmpty()) {
+			LoggerConfig.LOGGER_EMPLOYEE.error("Validation error");
 			return new ResponseEntity<Object>(ResponseError.createFromValidation(violations), HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
 		employee = mapper.toModel(requestEmployeeDTO);
 		employee = Cryptography.encode(employee);
+		
+		String message = duplicateDocumentValidator(employee);
+		
+		if(!message.isEmpty()) {
+			LoggerConfig.LOGGER_EMPLOYEE.error("Duplicate documents");
+			throw new DuplicateDocumentsException(message);
+		}
 		
 		repository.save(employee);
 
@@ -110,6 +121,7 @@ public class EmployeesServicesImplement implements EmployeesServices {
 		Set<ConstraintViolation<RequestEmployeeDTO>> violations = validator.validate(requestEmployeeDTO);
 		
 		if(!violations.isEmpty()) {
+			LoggerConfig.LOGGER_EMPLOYEE.error("Validation error");
 			return new ResponseEntity<Object>(ResponseError.createFromValidation(violations), HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
@@ -130,7 +142,9 @@ public class EmployeesServicesImplement implements EmployeesServices {
 
 	@Override
 	public Employee delete(UUID employeeId) {
-		employee = repository.findById(employeeId).get();
+		employee = repository.findById(employeeId).orElseThrow(() -> 
+		 new ResourceNotFoundException("No records found for this id"));
+		
 		employee = mapper.employeeDelete(employee);
 
 		repository.save(employee);
@@ -139,4 +153,24 @@ public class EmployeesServicesImplement implements EmployeesServices {
 		
 		return employee;
 	}
+	
+	private String duplicateDocumentValidator(Employee employee) {
+		String message = "";
+
+		Employee employeeEntityRg =  repository.findByRg(employee.getRg()); 	
+		Employee employeeEntityCpf =  repository.findByCpf(employee.getCpf()); 
+		
+		if(employeeEntityCpf != null && employeeEntityRg != null) {
+			message = "Documents already registered";
+		}
+		else if(employeeEntityCpf != null) {
+			message = "Cpf already registered";
+		}
+		else if( employeeEntityRg != null){
+			message = "Rg already registered";
+		}		
+		
+		return message;
+	}
+
 }
