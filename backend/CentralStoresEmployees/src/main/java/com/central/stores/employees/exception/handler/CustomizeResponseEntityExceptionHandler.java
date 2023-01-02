@@ -2,6 +2,7 @@ package com.central.stores.employees.exception.handler;
 
 import java.util.Date;
 
+import com.central.stores.employees.exception.DuplicateDocumentsException;
 import com.central.stores.employees.exception.ExceptionResponse;
 import com.central.stores.employees.exception.ResourceNotFoundException;
 
@@ -36,5 +37,16 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
 				request.getDescription(false));
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(DuplicateDocumentsException.class)
+	public final ResponseEntity<ExceptionResponse> handleDuplicateDocumentsExceptions(Exception exception, WebRequest request){
+		
+		ExceptionResponse exceptionResponse = new ExceptionResponse(
+				new Date(), 
+				exception.getMessage(),
+				request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 }
