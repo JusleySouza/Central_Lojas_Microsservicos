@@ -83,7 +83,7 @@ public class EmployeesServicesImplementTest {
 		employee.setActive(false);
 		when(mapper.employeeDelete(any())).thenReturn(employee);
 		when(repository.findById(any())).thenReturn(Optional.of(employee));
-		Employee emp = services.delete(UUID.randomUUID());
+		Employee emp = (Employee) services.delete(UUID.randomUUID());
 		
 		assertTrue(emp.getActive().equals(false));
 	}

@@ -125,7 +125,7 @@ public class EmployeesServicesImplement implements EmployeesServices {
 		
 		LoggerConfig.LOGGER_EMPLOYEE.info("Employee data successfully updated");
 
-		return new ResponseEntity<Object>(responseEmployeeDTO, HttpStatus.NO_CONTENT) ;
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 
 	@Override

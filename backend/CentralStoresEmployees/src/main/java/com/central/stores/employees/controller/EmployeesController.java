@@ -39,9 +39,9 @@ public class EmployeesController {
 	}
 	
 	@DeleteMapping("/{employeeId}")
-	public ResponseEntity<ResponseEmployeeDTO> delete(@PathVariable("employeeId") UUID employeeId){
+	public ResponseEntity<Object> delete(@PathVariable("employeeId") UUID employeeId){
 		 services.delete(employeeId);
-		 return new ResponseEntity<ResponseEmployeeDTO>(HttpStatus.NO_CONTENT);
+		 return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
 	@GetMapping("list")
