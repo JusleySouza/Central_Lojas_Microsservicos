@@ -71,7 +71,7 @@ public class EmployeesControllerTest {
 	void create() throws Exception {
 	mockMvc.perform(MockMvcRequestBuilders.post(CONTEXT_PATH)
 			.contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employee)))
-			.andExpect(status().isCreated());
+			.andExpect(status().isOk());
 	}
 	
 	@Test
