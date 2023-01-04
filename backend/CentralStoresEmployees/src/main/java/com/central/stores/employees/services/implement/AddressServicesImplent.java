@@ -79,7 +79,7 @@ public class AddressServicesImplent implements AddressServices {
 		
 		LoggerConfig.LOGGER_ADDRESS.info("Address updated");
 		
-		return new ResponseEntity<Object>(address, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 
 }
