@@ -1,8 +1,11 @@
 package com.central.stores.employees.model.dto.error;
 
 import lombok.Data;
+import lombok.Generated;
+
 
 @Data
+@Generated
 public class FieldError {
 
 	private String field;

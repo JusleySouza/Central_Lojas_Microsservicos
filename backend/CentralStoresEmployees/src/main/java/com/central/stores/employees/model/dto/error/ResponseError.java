@@ -8,8 +8,10 @@ import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 
 import lombok.Data;
+import lombok.Generated;
 
 @Data
+@Generated
 public class ResponseError {
 
 	private final String MESSAGE = "Validation error";

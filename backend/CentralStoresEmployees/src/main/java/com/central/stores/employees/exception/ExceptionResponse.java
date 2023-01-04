@@ -3,9 +3,11 @@ package com.central.stores.employees.exception;
 import java.io.Serializable;
 import java.util.Date;
 
+import lombok.Generated;
 import lombok.Getter;
 
 @Getter
+@Generated
 public class ExceptionResponse implements Serializable {
 	
 	private static final long serialVersionUID = 1l;
