@@ -12,58 +12,68 @@ import com.central.stores.employees.model.dto.ResponseEmployeeDTO;
 public final class ClassBuilder {
 
 	public static Address addressBuilder() {
-		return Address.builder()
-				.id(UUID.randomUUID())
-				.number(333)
-				.city("Teste city")
-				.street("Teste rua")
-				.changed(LocalDate.now())
-				.created(LocalDate.now())
-				.neighborhood("Teste bairro")
-				.build();
+		Address address = new Address(); 
+		
+		address.setNumber(333);
+		address.setCity("Teste city");
+		address.setStreet("Teste rua");
+		address.setId(UUID.randomUUID());
+		address.setChanged(LocalDate.now());
+		address.setCreated(LocalDate.now());
+		address.setNeighborhood("Teste bairro");
+		
+		return address;
 	}
 	
 	public static AddressDTO addressDTOBuilder() {
-		return AddressDTO.builder()
-				.number(333)
-				.city("Teste city")
-				.street("Teste rua")
-				.neighborhood("Teste bairro")
-				.build();
+		AddressDTO addressDTO = new AddressDTO();
+		
+		addressDTO.setNumber(333);
+		addressDTO.setCity("Teste city");
+		addressDTO.setStreet("Teste rua");
+		addressDTO.setNeighborhood("Teste bairro");
+		
+		return addressDTO;
 	}
 	
 	public static Employee employeeBuilder() {
-		return Employee.builder()
-				.id(UUID.randomUUID())
-				.gender("M")
-				.active(true)
-				.name("Teste")
-				.cpf("123456789")
-				.rg("5544669878")
-				.role("testador")
-				.phone("987654321")
-				.changed(LocalDate.now())
-				.created(LocalDate.now())
-				.email("teste@teste.com")
-				.build();
+		Employee employee = new Employee();
+		
+		employee.setId(UUID.randomUUID());
+		employee.setGender("M");
+		employee.setActive(true);
+		employee.setName("Teste");
+		employee.setCpf("123456789");
+		employee.setRg("5544669878");
+		employee.setRole("testador");
+		employee.setPhone("987654321");
+		employee.setChanged(LocalDate.now());
+		employee.setCreated(LocalDate.now());
+		employee.setEmail("teste@teste.com");
+		
+		return employee;
 	}
 	
 	public static RequestEmployeeDTO requestEmployeeDTOBuilder() {
-		return RequestEmployeeDTO.builder()
-				.gender("M")
-				.name("Teste")
-				.cpf("123456789")
-				.rg("5544669878")
-				.role("testador")
-				.phone("987654321")
-				.email("teste@teste.com")
-				.build();
+		RequestEmployeeDTO requestEmployeeDTO = new RequestEmployeeDTO();
+
+		requestEmployeeDTO.setGender("M");
+		requestEmployeeDTO.setName("Teste");
+		requestEmployeeDTO.setCpf("123456789");
+		requestEmployeeDTO.setRg("5544669878");
+		requestEmployeeDTO.setRole("testador");
+		requestEmployeeDTO.setPhone("987654321");
+		requestEmployeeDTO.setEmail("teste@teste.com");
+		
+		return requestEmployeeDTO;
 	}
 	
 	public static ResponseEmployeeDTO responseEmployeeDTOBuilder() {
-		return ResponseEmployeeDTO.builder()
-				.name("Teste")
-				.id(UUID.randomUUID())
-				.build();
+		ResponseEmployeeDTO responseEmployeeDTO = new ResponseEmployeeDTO();
+
+		responseEmployeeDTO.setName("Teste");
+		responseEmployeeDTO.setId(UUID.randomUUID());
+		
+		return responseEmployeeDTO;
 	}
 }
