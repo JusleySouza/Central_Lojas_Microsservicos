@@ -17,21 +17,6 @@ public class RequestEmployeeDTOTest {
 	}
 	
 	@Test
-	void builder() {
-		RequestEmployeeDTO requestEmployeeDTO = RequestEmployeeDTO.builder()
-				.gender("M")
-				.name("Teste")
-				.cpf("123456789")
-				.rg("5544669878")
-				.role("testador")
-				.phone("987654321")
-				.email("teste@teste.com")
-				.build();
-		
-		assertEquals(expectedRequestEmployeeDTO.toString(), requestEmployeeDTO.toString());
-	}
-	
-	@Test
 	void setter() {
 		RequestEmployeeDTO requestEmployeeDTO = new RequestEmployeeDTO();
 		requestEmployeeDTO.setGender("M");

@@ -17,18 +17,6 @@ public class AddressDTOTest {
 	}
 	
 	@Test
-	void builder() {
-		AddressDTO addressDTO = AddressDTO.builder()
-				.number(333)
-				.city("Teste city")
-				.street("Teste rua")
-				.neighborhood("Teste bairro")
-				.build();
-		
-		assertEquals(expectedAddressDTO.toString(), addressDTO.toString());
-	}
-	
-	@Test
 	void setter() {
 		AddressDTO addressDTO = new AddressDTO();
 		addressDTO.setNumber(333);

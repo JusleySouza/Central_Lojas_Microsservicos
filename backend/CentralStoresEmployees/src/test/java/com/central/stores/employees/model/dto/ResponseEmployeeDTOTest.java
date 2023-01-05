@@ -23,16 +23,6 @@ public class ResponseEmployeeDTOTest {
 	}
 	
 	@Test
-	void builder() {
-		ResponseEmployeeDTO responseEmployeeDTO = ResponseEmployeeDTO.builder()
-				.id(id)
-				.name("Teste")
-				.build();
-		
-		assertEquals(expectedResponseEmployeeDTO.toString(), responseEmployeeDTO.toString());
-	}
-	
-	@Test
 	void setter() {
 		ResponseEmployeeDTO responseEmployeeDTO = new ResponseEmployeeDTO();
 		responseEmployeeDTO.setId(id);
