@@ -1,10 +1,14 @@
 package com.central.stores.employees.model.dto.error;
 
-import lombok.Data;
 import lombok.Generated;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 
-@Data
+@Getter
+@Setter
+@ToString
 @Generated
 public class FieldError {
 

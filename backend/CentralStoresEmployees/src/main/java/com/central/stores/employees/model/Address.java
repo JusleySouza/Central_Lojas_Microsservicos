@@ -10,12 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.central.stores.employees.constants.Conf;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,10 +22,8 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@Builder
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class Address implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

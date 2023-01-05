@@ -7,10 +7,14 @@ import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 
-import lombok.Data;
 import lombok.Generated;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Generated
 public class ResponseError {
 

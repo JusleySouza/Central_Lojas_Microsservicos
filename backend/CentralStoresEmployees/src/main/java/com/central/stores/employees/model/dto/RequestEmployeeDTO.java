@@ -3,8 +3,6 @@ package com.central.stores.employees.model.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,10 +10,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@Builder
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class RequestEmployeeDTO {
 	@NotEmpty(message = "{name.not.empty}")
 	private String name;
