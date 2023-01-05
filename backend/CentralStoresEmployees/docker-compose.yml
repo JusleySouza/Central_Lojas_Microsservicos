@@ -1,0 +1,39 @@
+version: '1'
+
+services:
+  app:
+    image: 'central_stores_employees'
+    build:
+      context: .
+    container_name: CentralStoresEmployees
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis
+      
+    environment:
+      - SPRING_DATASOURCE_URL=${CONNECTION_STRING}
+      - SPRING_DATASOURCE_USERNAME=${USERNAME_DB}
+      - SPRING_DATASOURCE_PASSWORD=${PASSWORD_DB}
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=${DDL_AUTO}
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=${DRIVER}
+      - SPRING_JPA_SHOW-SQL=${SHOW_SQL}
+      
+      - SPRING_CACHE_TYPE=${CACHE_TYPE}
+      - SPRING_REDIS_HOST=${REDIS_HOST}
+      - SPRING_REDIS_PORT=${REDIS_PORT}
+      - SPRING_CACHE_REDIS_TIME-TO-LIVE=${REDIS_TIME_TO_LIVE}
+    
+  db:
+    image: 'postgres:13.1-alpine'
+    environment:
+      - POSTGRES_USER=${USERNAME}
+      - POSTGRES_PASSWORD=${PASSWORD}
+      - POSTGRES_DB=${DB}
+  
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
