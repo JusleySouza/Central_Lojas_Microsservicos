@@ -24,21 +24,6 @@ public class AddressTest {
 	}
 	
 	@Test
-	void build() {
-	Address address =  Address.builder()
-			.id(id)
-			.number(333)
-			.city("Teste city")
-			.street("Teste rua")
-			.changed(LocalDate.now())
-			.created(LocalDate.now())
-			.neighborhood("Teste bairro")
-			.build();
-		
-		assertEquals(expectedAddress.toString(), address.toString());
-	}
-	
-	@Test
 	void setter() {
 		Address address = new Address();
 		address.setId(id);

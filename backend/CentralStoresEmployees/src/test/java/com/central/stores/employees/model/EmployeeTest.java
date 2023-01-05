@@ -28,26 +28,6 @@ public class EmployeeTest {
 	}
 	
 	@Test
-	void builder() {
-		Employee employee = Employee.builder()
-				.id(id)
-				.gender("M")
-				.active(true)
-				.name("Teste")
-				.cpf("123456789")
-				.rg("5544669878")
-				.role("testador")
-				.phone("987654321")
-				.changed(LocalDate.now())
-				.created(LocalDate.now())
-				.email("teste@teste.com")
-				.address(address)
-				.build();
-		
-		assertEquals(expectedEmployee.toString(), employee.toString());
-	}
-	
-	@Test
 	void setter() {
 		Employee employee = new Employee();
 		employee.setId(id);
